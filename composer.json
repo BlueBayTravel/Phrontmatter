@@ -4,7 +4,7 @@
     "license": "MIT",
     "authors": [{
         "name": "James Brooks",
-        "email": "james@bluebaytravel.cou.k"
+        "email": "james@bluebaytravel.co.uk"
     }],
     "require": {
         "php": ">=5.5.9",
