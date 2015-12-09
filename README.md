@@ -1,5 +1,7 @@
 # Phrontmatter
 
+[![StyleCI](https://styleci.io/repos/47688815/shield)](https://styleci.io/repos/47688815)
+
 ```php
 // Parse a document.
 Phrontmatter::parse("---\nfoo: bar---\nThis is actual content!")->foo;
