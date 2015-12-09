@@ -11,8 +11,8 @@
 
 namespace BlueBayTravel\Tests\Phrontmatter\Facades;
 
-use BlueBayTravel\Phrontmatter\Phrontmatter;
 use BlueBayTravel\Phrontmatter\Facades\Phrontmatter as PhrontmatterFacade;
+use BlueBayTravel\Phrontmatter\Phrontmatter;
 use BlueBayTravel\Tests\Phrontmatter\AbstractTestCase;
 use GrahamCampbell\TestBenchCore\FacadeTrait;
 
