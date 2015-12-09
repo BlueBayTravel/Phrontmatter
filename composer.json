@@ -1,0 +1,40 @@
+{
+    "name": "bluebaytravel/phrontmatter",
+    "description": "Frontmatter handler for Laravel.",
+    "license": "MIT",
+    "authors": [{
+        "name": "James Brooks",
+        "email": "james@bluebaytravel.cou.k"
+    }],
+    "require": {
+        "php": ">=5.5.9",
+        "illuminate/contracts": "5.1.*|5.2.*",
+        "illuminate/support": "5.1.*|5.2.*",
+        "symfony/yaml": "~3.0"
+    },
+    "require-dev": {
+        "graham-campbell/testbench": "^3.1",
+        "phpunit/phpunit": "^4.8|^5.0",
+        "alt-three/testbench": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "BlueBayTravel\\Phrontmatter\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "BlueBayTravel\\Tests\\Phrontmatter\\": "tests/"
+        }
+    },
+    "config": {
+        "preferred-install": "dist"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
