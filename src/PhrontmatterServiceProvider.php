@@ -11,7 +11,6 @@
 
 namespace BlueBayTravel\Phrontmatter;
 
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
 class PhrontmatterServiceProvider extends ServiceProvider
