@@ -10,6 +10,8 @@ Phrontmatter::parse("---\nfoo: bar---\nThis is actual content!")->foo;
 $phrontmatter->parse("---\nfoo: bar---\nThis is actual content!")->getContent();
 ````
 
+For more information on Frontmatter, see the [Jekyll documentation](http://jekyllrb.com/docs/frontmatter/).
+
 ## Installation
 
 Require this package, with [Composer](https://getcomposer.org/), in the root directory of your project.
