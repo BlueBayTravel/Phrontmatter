@@ -20,6 +20,8 @@ Require this package, with [Composer](https://getcomposer.org/), in the root dir
 composer require bluebaytravel/phrontmatter
 ```
 
+### Laravel Installation
+
 Add the service provider to `config/app.php` in the `providers` array.
 
 ```php

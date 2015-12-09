@@ -1,6 +1,6 @@
 {
     "name": "bluebaytravel/phrontmatter",
-    "description": "Frontmatter parser for Laravel.",
+    "description": "Frontmatter parser for PHP.",
     "license": "MIT",
     "authors": [{
         "name": "James Brooks",
