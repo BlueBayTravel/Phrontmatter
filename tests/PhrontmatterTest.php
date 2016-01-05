@@ -51,12 +51,30 @@ class PhrontmatterTest extends AbstractTestCase
         $this->assertSame('This is actual content!', $document->getContent());
     }
 
+    public function testParseFullDocumentWithJson()
+    {
+        $document = $this->app->phrontmatter->parse("---\n{\"foo\":\"bar\"}\n---\nThis is a document with JSON!", Phrontmatter::JSON);
+
+        $this->assertInstanceOf(Phrontmatter::class, $document);
+        $this->assertSame(['foo' => 'bar'], $document->getData());
+        $this->assertSame('This is a document with JSON!', $document->getContent());
+    }
+
+    public function testParseFullDocumentWithToml()
+    {
+        $document = $this->app->phrontmatter->parse("---\nfoo = \"bar\"\n---\nThis is a document with TOML!", Phrontmatter::TOML);
+
+        $this->assertInstanceOf(Phrontmatter::class, $document);
+        $this->assertSame(['foo' => 'bar'], $document->getData());
+        $this->assertSame('This is a document with TOML!', $document->getContent());
+    }
+
     public function testGetKeys()
     {
         $document = $this->app->phrontmatter->parse("---\nfoo: bar\nbaz: qux\n---\n");
 
         $this->assertInstanceOf(Phrontmatter::class, $document);
-        $this->assertSame($document->getKeys(), ['foo', 'baz']);
+        $this->assertSame(['foo', 'baz'], $document->getKeys());
     }
 
     public function testGetData()
@@ -64,7 +82,7 @@ class PhrontmatterTest extends AbstractTestCase
         $document = $this->app->phrontmatter->parse("---\nfoo: bar\nbaz: qux\n---\n");
 
         $this->assertInstanceOf(Phrontmatter::class, $document);
-        $this->assertSame($document->getData(), ['foo' => 'bar', 'baz' => 'qux']);
+        $this->assertSame(['foo' => 'bar', 'baz' => 'qux'], $document->getData());
     }
 
     /**
