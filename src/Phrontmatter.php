@@ -11,12 +11,14 @@
 
 namespace BlueBayTravel\Phrontmatter;
 
+use ArrayAccess;
 use BlueBayTravel\Phrontmatter\Exceptions\InvalidFrontmatterFormatException;
 use BlueBayTravel\Phrontmatter\Exceptions\UndefinedPropertyException;
+use Countable;
 use Illuminate\Support\Str;
 use Symfony\Component\Yaml\Yaml;
 
-class Phrontmatter
+class Phrontmatter implements ArrayAccess, Countable
 {
     /**
      * The frontmatter data.
@@ -108,6 +110,16 @@ class Phrontmatter
     }
 
     /**
+     * Returns the data array.
+     *
+     * @return string[]
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
      * Magic getter method.
      *
      * @param string $key
@@ -121,5 +133,70 @@ class Phrontmatter
         }
 
         throw new UndefinedPropertyException("The key {$key} is undefined.");
+    }
+
+    /**
+     * Assigns a value to the specified offset.
+     *
+     * @param string $offset
+     * @param mixed  $value
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->data[] = $value;
+        } else {
+            $this->data[$offset] = $value;
+        }
+    }
+
+    /**
+     * Whether or not an offset exists.
+     *
+     * @param string $offset
+     *
+     * @return bool
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->data[$offset]);
+    }
+
+    /**
+     * Unsets an offset.
+     *
+     * @param string $offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        if ($this->offsetExists($offset)) {
+            unset($this->data[$offset]);
+        }
+    }
+
+    /**
+     * Returns the value at specified offset.
+     *
+     * @param string $offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return $this->offsetExists($offset) ? $this->data[$offset] : null;
+    }
+
+    /**
+     * Count the number of items in the dataset.
+     *
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->data);
     }
 }

@@ -11,7 +11,9 @@
 
 namespace BlueBayTravel\Tests\Phrontmatter;
 
+use ArrayAccess;
 use BlueBayTravel\Phrontmatter\Phrontmatter;
+use Countable;
 
 class PhrontmatterTest extends AbstractTestCase
 {
@@ -57,6 +59,14 @@ class PhrontmatterTest extends AbstractTestCase
         $this->assertSame($document->getKeys(), ['foo', 'baz']);
     }
 
+    public function testGetData()
+    {
+        $document = $this->app->phrontmatter->parse("---\nfoo: bar\nbaz: qux---\n");
+
+        $this->assertInstanceOf(Phrontmatter::class, $document);
+        $this->assertSame($document->getData(), ['foo' => 'bar', 'baz' => 'qux']);
+    }
+
     /**
      * @expectedException \BlueBayTravel\Phrontmatter\Exceptions\UndefinedPropertyException
      */
@@ -64,5 +74,25 @@ class PhrontmatterTest extends AbstractTestCase
     {
         $document = $this->app->phrontmatter->parse("---\nfoo: bar---\nThis is actual content!");
         $this->assertNull($document->name);
+    }
+
+    public function testArrayAccessInterface()
+    {
+        $document = $this->app->phrontmatter->parse("---\nfoo: bar\nbaz: bux---\nThis is actual content!");
+
+        $this->assertInstanceOf(ArrayAccess::class, $document);
+        $this->assertTrue($document->offsetExists('foo'));
+        $document->offsetSet('foo', 'james');
+
+        $this->assertSame('james', $document->offsetGet('foo'));
+        $document->offsetUnset('foo');
+    }
+
+    public function testCountableInterface()
+    {
+        $document = $this->app->phrontmatter->parse("---\nfoo: bar\nbaz: bux---\nThis is actual content!");
+
+        $this->assertInstanceOf(Countable::class, $document);
+        $this->assertEquals(2, $document->count());
     }
 }
