@@ -1,6 +1,7 @@
 # Phrontmatter
 
 [![StyleCI](https://styleci.io/repos/47688815/shield)](https://styleci.io/repos/47688815)
+[![Build Status](https://img.shields.io/travis/BlueBayTravel/Phrontmatter.svg?style=flat-square)](https://travis-ci.org/BlueBayTravel/Phrontmatter)
 
 ```php
 // Parse a document.
