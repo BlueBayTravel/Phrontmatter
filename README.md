@@ -9,6 +9,9 @@ Phrontmatter::parse("---\nfoo: bar---\nThis is actual content!")->foo;
 
 // Dependency injection example.
 $phrontmatter->parse("---\nfoo: bar---\nThis is actual content!")->getContent();
+
+// Parse a document with JSON meta data.
+$phrontmatter->parse("---\n{\"foo\":\"bar\"}\n---\nThis is a document with JSON!", Phrontmatter::JSON)->getData();
 ````
 
 For more information on Frontmatter, see the [Jekyll documentation](http://jekyllrb.com/docs/frontmatter/).
@@ -34,6 +37,14 @@ If you want you can use the [facade](http://laravel.com/docs/facades). Add the r
 ```php
 'Phrontmatter' => BlueBayTravel\Phrontmatter\Facades\Phrontmatter::class
 ```
+
+## Supported Formatters
+
+Phrontmatter supports the following formatters:
+
+- YAML (default)
+- TOML
+- JSON
 
 ## License
 

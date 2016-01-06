@@ -16,7 +16,6 @@ use BlueBayTravel\Phrontmatter\Exceptions\InvalidFrontmatterFormatException;
 use BlueBayTravel\Phrontmatter\Exceptions\UndefinedPropertyException;
 use Countable;
 use Illuminate\Support\Str;
-use Symfony\Component\Yaml\Yaml;
 
 class Phrontmatter implements ArrayAccess, Countable
 {
@@ -42,14 +41,42 @@ class Phrontmatter implements ArrayAccess, Countable
     protected $content;
 
     /**
+     * JSON formatter constant.
+     *
+     * @var string
+     */
+    const JSON = '\\BlueBayTravel\\Phrontmatter\\Formatters\\JsonFormatter';
+
+    /**
+     * TOML formatter constant.
+     *
+     * @var string
+     */
+    const TOML = '\\BlueBayTravel\\Phrontmatter\\Formatters\\TomlFormatter';
+
+    /**
+     * YAML formatter constant.
+     *
+     * @var string
+     */
+    const YAML = '\\BlueBayTravel\\Phrontmatter\\Formatters\\YamlFormatter';
+
+    /**
      * Parse the frontmatter file.
      *
-     * @param string $content
+     * @param string      $content
+     * @param null|string $formatter
      *
      * @return bool
      */
-    public function parse($content)
+    public function parse($content, $formatter = null)
     {
+        if ($formatter === null) {
+            $formatter = self::YAML;
+        }
+
+        $parser = new $formatter();
+
         // If the file doesn't immediately begin with a separator then this isn't a Frontmatter file.
         if (!Str::startsWith($content, '---')) {
             throw new InvalidFrontmatterFormatException('A valid Frontmatter document is expected to start with "---"');
@@ -61,14 +88,14 @@ class Phrontmatter implements ArrayAccess, Countable
         if (count($doc) <= 1) { // Empty Document
             $this->content = '';
         } elseif (count($doc) === 2) { // Only Frontmatter
-            $this->frontmatter = $doc[1];
+            $this->frontmatter = trim($doc[1]);
         } else { // Frontmatter and content
-            $this->frontmatter = $doc[1];
+            $this->frontmatter = trim($doc[1]);
             $this->content = ltrim($doc[2]);
         }
 
         // Parse the Frontmatter content.
-        $this->data = Yaml::parse($this->frontmatter);
+        $this->data = $parser->deserialize($this->frontmatter);
 
         return $this;
     }
