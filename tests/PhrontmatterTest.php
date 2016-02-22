@@ -14,27 +14,28 @@ namespace BlueBayTravel\Tests\Phrontmatter;
 use ArrayAccess;
 use BlueBayTravel\Phrontmatter\Phrontmatter;
 use Countable;
+use GrahamCampbell\TestBench\AbstractTestCase as BaseAbstractTestCase;
 
-class PhrontmatterTest extends AbstractTestCase
+class PhrontmatterTest extends BaseAbstractTestCase
 {
     /**
      * @expectedException \BlueBayTravel\Phrontmatter\Exceptions\InvalidFrontmatterFormatException
      */
     public function testParseException()
     {
-        $this->app->phrontmatter->parse('Foo bar baz bux');
+        $this->getPhrontmatter()->parse('Foo bar baz bux');
     }
 
     public function testParseEmptyDocument()
     {
-        $document = $this->app->phrontmatter->parse('---');
+        $document = $this->getPhrontmatter()->parse('---');
 
         $this->assertInstanceOf(Phrontmatter::class, $document);
     }
 
     public function testParseFrontmatterOnlyDocument()
     {
-        $document = $this->app->phrontmatter->parse("---\nfoo: bar\n---");
+        $document = $this->getPhrontmatter()->parse("---\nfoo: bar\n---");
 
         $this->assertInstanceOf(Phrontmatter::class, $document);
         $this->assertSame('bar', $document->get('foo'));
@@ -43,7 +44,7 @@ class PhrontmatterTest extends AbstractTestCase
 
     public function testParseFullDocument()
     {
-        $document = $this->app->phrontmatter->parse("---\nfoo: bar\n---\nThis is actual content!");
+        $document = $this->getPhrontmatter()->parse("---\nfoo: bar\n---\nThis is actual content!");
 
         $this->assertInstanceOf(Phrontmatter::class, $document);
         $this->assertSame('bar', $document->get('foo'));
@@ -53,7 +54,7 @@ class PhrontmatterTest extends AbstractTestCase
 
     public function testParseFullDocumentWithJson()
     {
-        $document = $this->app->phrontmatter->parse("---\n{\"foo\":\"bar\"}\n---\nThis is a document with JSON!", Phrontmatter::JSON);
+        $document = $this->getPhrontmatter()->parse("---\n{\"foo\":\"bar\"}\n---\nThis is a document with JSON!", Phrontmatter::JSON);
 
         $this->assertInstanceOf(Phrontmatter::class, $document);
         $this->assertSame(['foo' => 'bar'], $document->getData());
@@ -62,7 +63,7 @@ class PhrontmatterTest extends AbstractTestCase
 
     public function testParseFullDocumentWithToml()
     {
-        $document = $this->app->phrontmatter->parse("---\nfoo = \"bar\"\n---\nThis is a document with TOML!", Phrontmatter::TOML);
+        $document = $this->getPhrontmatter()->parse("---\nfoo = \"bar\"\n---\nThis is a document with TOML!", Phrontmatter::TOML);
 
         $this->assertInstanceOf(Phrontmatter::class, $document);
         $this->assertSame(['foo' => 'bar'], $document->getData());
@@ -71,7 +72,7 @@ class PhrontmatterTest extends AbstractTestCase
 
     public function testGetKeys()
     {
-        $document = $this->app->phrontmatter->parse("---\nfoo: bar\nbaz: qux\n---\n");
+        $document = $this->getPhrontmatter()->parse("---\nfoo: bar\nbaz: qux\n---\n");
 
         $this->assertInstanceOf(Phrontmatter::class, $document);
         $this->assertSame(['foo', 'baz'], $document->getKeys());
@@ -79,7 +80,7 @@ class PhrontmatterTest extends AbstractTestCase
 
     public function testGetData()
     {
-        $document = $this->app->phrontmatter->parse("---\nfoo: bar\nbaz: qux\n---\n");
+        $document = $this->getPhrontmatter()->parse("---\nfoo: bar\nbaz: qux\n---\n");
 
         $this->assertInstanceOf(Phrontmatter::class, $document);
         $this->assertSame(['foo' => 'bar', 'baz' => 'qux'], $document->getData());
@@ -90,13 +91,13 @@ class PhrontmatterTest extends AbstractTestCase
      */
     public function testUndefinedPropertyException()
     {
-        $document = $this->app->phrontmatter->parse("---\nfoo: bar\n---\nThis is actual content!");
+        $document = $this->getPhrontmatter()->parse("---\nfoo: bar\n---\nThis is actual content!");
         $this->assertNull($document->name);
     }
 
     public function testArrayAccessInterface()
     {
-        $document = $this->app->phrontmatter->parse("---\nfoo: bar\nbaz: bux\n---\nThis is actual content!");
+        $document = $this->getPhrontmatter()->parse("---\nfoo: bar\nbaz: bux\n---\nThis is actual content!");
 
         $this->assertInstanceOf(ArrayAccess::class, $document);
         $this->assertTrue($document->offsetExists('foo'));
@@ -108,9 +109,14 @@ class PhrontmatterTest extends AbstractTestCase
 
     public function testCountableInterface()
     {
-        $document = $this->app->phrontmatter->parse("---\nfoo: bar\nbaz: bux\n---\nThis is actual content!");
+        $document = $this->getPhrontmatter()->parse("---\nfoo: bar\nbaz: bux\n---\nThis is actual content!");
 
         $this->assertInstanceOf(Countable::class, $document);
         $this->assertEquals(2, $document->count());
+    }
+
+    protected function getPhrontmatter()
+    {
+        return new Phrontmatter();
     }
 }
