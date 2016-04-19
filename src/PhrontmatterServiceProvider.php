@@ -13,6 +13,11 @@ namespace BlueBayTravel\Phrontmatter;
 
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * This is the phrontmatter service provider class.
+ *
+ * @author James Brooks <james@bluebaytravel.co.uk>
+ */
 class PhrontmatterServiceProvider extends ServiceProvider
 {
     /**

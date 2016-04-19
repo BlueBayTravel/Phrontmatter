@@ -11,6 +11,11 @@
 
 namespace BlueBayTravel\Phrontmatter\Formatters;
 
+/**
+ * This is the json formatter class.
+ *
+ * @author James Brooks <james@bluebaytravel.co.uk>
+ */
 class JsonFormatter implements PhrontmatterFormatterInterface
 {
     /**

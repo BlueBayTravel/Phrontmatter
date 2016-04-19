@@ -13,6 +13,11 @@ namespace BlueBayTravel\Phrontmatter\Formatters;
 
 use Symfony\Component\Yaml\Yaml;
 
+/**
+ * This is the yaml formatter class.
+ *
+ * @author James Brooks <james@bluebaytravel.co.uk>
+ */
 class YamlFormatter implements PhrontmatterFormatterInterface
 {
     /**

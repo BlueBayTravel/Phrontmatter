@@ -13,6 +13,11 @@ namespace BlueBayTravel\Phrontmatter\Exceptions;
 
 use Exception;
 
+/**
+ * This is the undefined property exception class.
+ *
+ * @author James Brooks <james@bluebaytravel.co.uk>
+ */
 class UndefinedPropertyException extends Exception implements PhrontmatterExceptionInterface
 {
     //

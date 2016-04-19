@@ -11,6 +11,11 @@
 
 namespace BlueBayTravel\Phrontmatter\Formatters;
 
+/**
+ * This is the phrontmatter formatter interface.
+ *
+ * @author James Brooks <james@bluebaytravel.co.uk>
+ */
 interface PhrontmatterFormatterInterface
 {
     public function deserialize($data);

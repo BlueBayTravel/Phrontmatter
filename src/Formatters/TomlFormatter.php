@@ -13,6 +13,11 @@ namespace BlueBayTravel\Phrontmatter\Formatters;
 
 use Toml\Parser;
 
+/**
+ * This is the toml formatter class.
+ *
+ * @author James Brooks <james@bluebaytravel.co.uk>
+ */
 class TomlFormatter implements PhrontmatterFormatterInterface
 {
     /**

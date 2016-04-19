@@ -11,6 +11,11 @@
 
 namespace BlueBayTravel\Phrontmatter\Exceptions;
 
+/**
+ * This is the phrontmatter exception interface.
+ *
+ * @author James Brooks <james@bluebaytravel.co.uk>
+ */
 interface PhrontmatterExceptionInterface
 {
     //

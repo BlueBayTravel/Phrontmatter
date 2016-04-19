@@ -17,6 +17,11 @@ use BlueBayTravel\Phrontmatter\Exceptions\UndefinedPropertyException;
 use Countable;
 use Illuminate\Support\Str;
 
+/**
+ * This is the phrontmatter class.
+ *
+ * @author James Brooks <james@bluebaytravel.co.uk>
+ */
 class Phrontmatter implements ArrayAccess, Countable
 {
     /**

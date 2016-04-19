@@ -13,6 +13,11 @@ namespace BlueBayTravel\Phrontmatter\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
+/**
+ * This is the phrontmatter facade class.
+ *
+ * @author James Brooks <james@bluebaytravel.co.uk>
+ */
 class Phrontmatter extends Facade
 {
     /**

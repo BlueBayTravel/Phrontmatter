@@ -13,6 +13,11 @@ namespace BlueBayTravel\Phrontmatter\Exceptions;
 
 use Exception;
 
+/**
+ * This is the invalid frontmatter format exception class.
+ *
+ * @author James Brooks <james@bluebaytravel.co.uk>
+ */
 class InvalidFrontmatterFormatException extends Exception implements PhrontmatterExceptionInterface
 {
     //
