@@ -151,15 +151,36 @@ class Phrontmatter implements ArrayAccess, Countable
      *
      * @param string $key
      *
+     * @throws \BlueBayTravel\Phrontmatter\Exceptions\UndefinedPropertyException description
+     *
      * @return mixed
      */
     public function __get($key)
     {
-        if (isset($this->data[$key])) {
-            return $this->data[$key];
+        if (!isset($this->data[$key])) {
+            throw new UndefinedPropertyException("The key {$key} is undefined.");
         }
 
-        throw new UndefinedPropertyException("The key {$key} is undefined.");
+        return $this->data[$key];
+    }
+
+    /**
+     * Magic setter method.
+     *
+     * @param string $key
+     * @param mixed  $value
+     *
+     * @throws \BlueBayTravel\Phrontmatter\Exceptions\UndefinedPropertyException description
+     *
+     * @return void
+     */
+    public function __set($key, $value)
+    {
+        if (!isset($this->data[$key])) {
+            throw new UndefinedPropertyException("The key {$key} is undefined.");
+        }
+
+        $this->data[$key] = $value;
     }
 
     /**
