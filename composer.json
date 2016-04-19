@@ -1,6 +1,6 @@
 {
     "name": "bluebaytravel/phrontmatter",
-    "description": "Frontmatter parser for PHP.",
+    "description": "Front Matter parser for PHP, with support for YAML, JSON and TOML.",
     "license": "MIT",
     "authors": [{
         "name": "James Brooks",
@@ -10,8 +10,8 @@
         "php": ">=5.5.9",
         "illuminate/contracts": "5.1.*|5.2.*",
         "illuminate/support": "5.1.*|5.2.*",
-        "symfony/yaml": "~2.7|~3.0",
-        "jamesmoss/toml": "^1.1"
+        "jamesmoss/toml": "^1.1",
+        "symfony/yaml": "~2.7|~3.0"
     },
     "require-dev": {
         "graham-campbell/testbench": "^3.1",
