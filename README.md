@@ -14,7 +14,7 @@ $phrontmatter->parse("---\nfoo: bar---\nThis is actual content!")->getContent();
 $phrontmatter->parse("---\n{\"foo\":\"bar\"}\n---\nThis is a document with JSON!", Phrontmatter::JSON)->getData();
 ````
 
-For more information on Frontmatter, see the [Jekyll documentation](http://jekyllrb.com/docs/frontmatter/).
+For more information on Front Matter, see the [Jekyll documentation](http://jekyllrb.com/docs/frontmatter/).
 
 ## Installation
 
