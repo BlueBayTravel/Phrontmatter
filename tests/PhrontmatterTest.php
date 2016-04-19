@@ -86,6 +86,23 @@ class PhrontmatterTest extends BaseAbstractTestCase
         $this->assertSame(['foo' => 'bar', 'baz' => 'qux'], $document->getData());
     }
 
+    public function testMagicGetData()
+    {
+        $document = $this->getPhrontmatter()->parse("---\nfoo: bar\nbaz: qux\n---\n");
+
+        $this->assertInstanceOf(Phrontmatter::class, $document);
+        $this->assertSame('bar', $document->foo);
+    }
+
+    public function testMagicSetData()
+    {
+        $document = $this->getPhrontmatter()->parse("---\nfoo: bar\nbaz: qux\n---\n");
+
+        $this->assertInstanceOf(Phrontmatter::class, $document);
+        $document->foo = 'world';
+        $this->assertSame('world', $document->foo);
+    }
+
     /**
      * @expectedException \BlueBayTravel\Phrontmatter\Exceptions\UndefinedPropertyException
      */
