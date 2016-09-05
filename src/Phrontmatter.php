@@ -95,8 +95,18 @@ class Phrontmatter implements ArrayAccess, Countable
         } elseif (count($doc) === 2) { // Only Frontmatter
             $this->frontmatter = trim($doc[1]);
         } else { // Frontmatter and content
+            // It's possible that the Markdown content contains a HR (---) tag. We should merge these values back together.
+            $content = $doc[2];
+
+            if (count($doc) > 3) {
+                $content = '';
+                for ($i = 3; $i < count($doc); $i++) {
+                    $content .= $doc[$i];
+                }
+            }
+
             $this->frontmatter = trim($doc[1]);
-            $this->content = ltrim($doc[2]);
+            $this->content = ltrim($content);
         }
 
         // Parse the Frontmatter content.
