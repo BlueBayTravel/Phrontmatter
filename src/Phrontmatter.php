@@ -172,7 +172,7 @@ class Phrontmatter implements ArrayAccess, Countable
      */
     public function __get($key)
     {
-        if (!isset($this->data[$key])) {
+        if (!array_key_exists($key, $this->data)) {
             throw new UndefinedPropertyException("The key {$key} is undefined.");
         }
 
