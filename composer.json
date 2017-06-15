@@ -33,6 +33,14 @@
     "extra": {
         "branch-alias": {
             "dev-master": "1.4-dev"
+        },
+        "laravel": {
+            "providers": [
+                "BlueBayTravel\\Phrontmatter\\PhrontmatterServiceProvider",
+            ],
+            "aliases": {
+                "Phrontmatter": "BlueBayTravel\\Phrontmatter\\Facades\\Phrontmatter"
+            }
         }
     },
     "minimum-stability": "dev",
